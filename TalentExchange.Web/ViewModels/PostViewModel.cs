@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using TalentExchange.Data.Models;
 
-namespace TalentExchange.Data.Models
+namespace TalentExchange.Web.ViewModels
 {
-    public class Post
+    public class PostViewModel
     {
-        [Key]
         public int Id { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        [Required]
         public string Title { get; set; }
-        [Required]
         public string Content { get; set; }
         public int CategoryId { get; set; }
         public string Location { get; set; }
         public bool IsComplete { get; set; }
-        //public List<Tag> Tags { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual Category Category { get; set; }

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TalentExchange.Data\TalentExchange.Data.csproj" />
+  </ItemGroup>
+
 </Project>
