@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TalentExchange.Services.PostService;
-using TalentExchange.Web.Serialization;
 using TalentExchange.Web.ViewModels;
 
 namespace TalentExchange.Web.Controllers
@@ -25,7 +22,7 @@ namespace TalentExchange.Web.Controllers
         }
 
         [HttpGet("/api/post")]
-        public ActionResult GetAllPost()
+        public ActionResult GetAllPosts()
         {
             _logger.LogInformation("Getting all posts");
             var posts = _postService.GetAllPosts();
@@ -35,6 +32,20 @@ namespace TalentExchange.Web.Controllers
                 postDto.Add(_mapper.Map<PostViewModel>(post));
             }
             return Ok(postDto);
+        }
+
+        //[HttpGet("/api/post/")]
+        //public ActionResult GetPostById()
+        //{
+
+        //}
+
+        [HttpPatch("/api/post/{id}")]
+        public ActionResult ArchivePost(int id)
+        {
+            _logger.LogInformation($"Archiving post number : {id}");
+            var archiveResult= _postService.ArchivePost(id);
+            return Ok(archiveResult);
         }
     }
 }

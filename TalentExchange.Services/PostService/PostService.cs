@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TalentExchange.Data;
@@ -9,6 +10,7 @@ namespace TalentExchange.Services.PostService
     public class PostService : IPostService
     {
         private readonly ApplicationDbContext _db;
+        private readonly ILogger<IPostService> _logger;
 
         public PostService(ApplicationDbContext db)
         {
@@ -45,6 +47,7 @@ namespace TalentExchange.Services.PostService
 
         public ServiceResponse<Post> CreatePost(Post post)
         {
+            _logger.LogInformation("Creating new post");
             try
             {
                 var newPost = new Post
