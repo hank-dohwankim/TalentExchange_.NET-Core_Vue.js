@@ -34,11 +34,14 @@ namespace TalentExchange.Web.Controllers
             return Ok(postDto);
         }
 
-        //[HttpGet("/api/post/")]
-        //public ActionResult GetPostById()
-        //{
-
-        //}
+        [HttpGet("/api/post/{id}")]
+        public ActionResult GetPostById(int id)
+        {
+            _logger.LogInformation($"Getting post {id}");
+            var post = _postService.GetPostById(id);
+            var postDto = new PostViewModel();
+            return Ok(postDto);
+        }
 
         [HttpPatch("/api/post/{id}")]
         public ActionResult ArchivePost(int id)
