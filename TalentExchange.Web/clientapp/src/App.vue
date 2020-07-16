@@ -10,18 +10,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Navbar from "@/components/Navigation.vue";
+import { Component, Vue } from 'vue-property-decorator';
+import Navbar from '@/components/Navigation.vue';
 
 @Component({
-  name: "App",
-  components: { Navbar }
+  name: 'App',
+  components: { Navbar },
 })
 export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-@import "@/scss/global.scss";
+@import '@/scss/global.scss';
 #app {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;

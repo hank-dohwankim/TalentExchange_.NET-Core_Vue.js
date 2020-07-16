@@ -1,25 +1,29 @@
 <template>
   <div class="index container">
     <div class="card" v-for="post in posts" :key="post.id">
-      <div>
-        <h4 class="card-title">{{ post.title }}</h4>
-      </div>
-      <div class="card-location">{{ post.location }}</div>
-      <div class="card-content">{{ post.content }}</div>
-      <ul class="card-tags">
-        <li v-for="(tag, index) in post.tags" :key="index">
-          <span class="chip">{{ tag }}</span>
-        </li>
-      </ul>
+      <router-link :to="{ name: 'PostDetail', params: { post_id: post.id } }">
+        <div class="card-container">
+          <div>
+            <h4 class="card-title">{{ post.title }}</h4>
+            <h4 class="card-category">{{ post.categoryId }}</h4>
+          </div>
+          <div class="card-location">{{ post.location }}</div>
+          <div class="card-content">{{ post.content }}</div>
+          <ul class="card-tags">
+            <li v-for="(tag, index) in post.tags" :key="index">
+              <span class="chip">{{ tag.tagName }}</span>
+            </li>
+          </ul>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 // import { Component, Vue } from "vue-property-decorator";
 // // import Post from "@/components/Post.vue";
 // import { IPostService } from "@/types/Post";
-
 export default {
   name: "Index",
   components: {
@@ -27,79 +31,17 @@ export default {
   },
   data() {
     return {
-      posts: [
-        {
-          id: "1",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "2",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        },
-        {
-          id: "3",
-          title: "This is title for card",
-          content: "this is content for card",
-          location: "this is location",
-          tags: ["tag1", "tag2", "tag3"]
-        }
-      ]
+      posts: []
     };
+  },
+  methods: {},
+  mounted() {
+    this.$axios
+      .get("https://talentexchangeapp.azurewebsites.net/api/post")
+      .then(result => {
+        console.log(result);
+        this.posts = result.data;
+      });
   }
 };
 </script>
@@ -122,7 +64,7 @@ export default {
   }
 
   .card {
-    display: flex;
+    display: flexbox;
     flex-direction: column;
     max-width: 400px;
     min-height: 200px;
@@ -131,8 +73,11 @@ export default {
     border-radius: 4px;
     margin: 10px;
     text-align: left;
-    padding: 30px 30px;
     cursor: pointer;
+
+    .card-container {
+      padding: 30px;
+    }
 
     .card-title {
       color: #0e75e2;

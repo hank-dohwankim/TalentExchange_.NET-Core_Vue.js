@@ -1,21 +1,26 @@
-import Vue from "vue";
-import VueRouter, { RouteConfig } from "vue-router";
-import Index from "../views/Index.vue";
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import Index from '../views/Index.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
-    name: "index",
-    component: Index
-  }
+    path: '/',
+    name: 'index',
+    component: Index,
+  },
+  {
+    path: '/post/:post_id',
+    name: 'PostDetail',
+    component: () => import('@/components/post/PostDetail.vue'),
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
