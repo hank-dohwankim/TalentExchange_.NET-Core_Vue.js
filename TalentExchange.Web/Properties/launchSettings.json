@@ -5,6 +5,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:50598",
+      //"applicationUrl": "https://talentexchangeapp.azurewebsites.net/",
       "sslPort": 0
     }
   },
