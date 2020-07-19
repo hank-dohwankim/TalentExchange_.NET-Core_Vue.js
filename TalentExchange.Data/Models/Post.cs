@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TalentExchange.Data.Models
 {
@@ -15,10 +16,14 @@ namespace TalentExchange.Data.Models
         public string Title { get; set; }
         [Required]
         public string Content { get; set; }
-        public int CategoryId { get; set; }
         public string Location { get; set; }
         public bool IsComplete { get; set; }
-        //public List<Tag> Tags { get; set; }
+
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+
+        [ForeignKey("Reply")]
+        public int ReplyId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual Category Category { get; set; }

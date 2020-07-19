@@ -36,12 +36,10 @@ export default {
   },
   methods: {},
   mounted() {
-    this.$axios
-      .get("https://talentexchangeapp.azurewebsites.net/api/post")
-      .then(result => {
-        console.log(result);
-        this.posts = result.data;
-      });
+    this.$axios.get("http://localhost:50598/api/post").then(result => {
+      console.log(result);
+      this.posts = result.data;
+    });
   }
 };
 </script>

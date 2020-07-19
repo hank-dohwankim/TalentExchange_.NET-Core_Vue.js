@@ -47,12 +47,11 @@ namespace TalentExchange.Services.PostService
 
         public ServiceResponse<Post> CreatePost(Post post)
         {
-            _logger.LogInformation("Creating new post");
             try
             {
                 var newPost = new Post
                 {
-                    CategoryId = post.Category.Id,
+                    CategoryId = post.CategoryId,
                     Location = post.Location,
                     Tags = post.Tags,
                     CreatedOn = post.CreatedOn,
@@ -79,6 +78,39 @@ namespace TalentExchange.Services.PostService
                     Data = post,
                     Time = DateTime.UtcNow,
                     Message = "Error creating new post",
+                    IsSuccess = false
+                };
+            }
+        }
+
+        public ServiceResponse<Post> DeletePost(Post post)
+        {
+            try
+            {
+                var postReplies = _db.PostReplies.Where(x => x.Post.Id == post.Id);
+                var postTags = _db.Tags.Where(x => x.Post.Id == post.Id);
+
+                _db.PostReplies.RemoveRange(postReplies);
+                _db.Tags.RemoveRange(postTags);
+                _db.Posts.Remove(post);
+
+                _db.SaveChanges();
+
+                return new ServiceResponse<Post>
+                {
+                    Data = null,
+                    Time = DateTime.Now,
+                    Message = "Post deleted",
+                    IsSuccess = true
+                };
+            }
+            catch (Exception e)
+            {
+                return new ServiceResponse<Post>
+                {
+                    Data = post,
+                    Time = DateTime.Now,
+                    Message = "Error deleting post.",
                     IsSuccess = false
                 };
             }

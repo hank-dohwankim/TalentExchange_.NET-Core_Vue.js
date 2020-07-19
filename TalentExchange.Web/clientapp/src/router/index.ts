@@ -7,8 +7,8 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'index',
-    component: Index,
+    name: 'Index',
+    component: () => import('@/views/Index.vue'),
   },
   {
     path: '/post/:post_id',

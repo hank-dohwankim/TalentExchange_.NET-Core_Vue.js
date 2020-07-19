@@ -45,6 +45,7 @@ namespace TalentExchange.Web
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
             app.UseCors(
                builder => builder
                .WithOrigins(
